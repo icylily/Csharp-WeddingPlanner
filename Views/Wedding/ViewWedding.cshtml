@@ -1,0 +1,37 @@
+@model Wedding
+
+<div class = "row">
+    <div class = "col-md-2 text-center" ></div>
+    <div class = "col-md-8 align-text-top text-center" ><h1>@Model.WedderOne and @Model.WedderTwo 's  Wedding</h1></div>
+    <div class = "col-md-2 align-bottom text-center" ></div>
+</div>
+
+<div class = "row">
+    <div class = "col-md-8 text-center" ></div>
+    <div class = "col-md-2 text-center" > <a href="/Dashboard">Dashboard</a> | <a href="/logout">Log Out</a> </div>
+    <div class = "col-md-2 align-bottom text-center" ></div>
+</div>
+<hr>
+
+<div class="row">
+    <div class="col-md-4 text-left"> 
+        <h3>Date: @Model.DateofWeeding.ToString("MMMM dd , yyyy")</h3>
+        <h3>Created By: @Model.Creator.FirstName @Model.Creator.LastName </h3>
+        <h3>Address:<span id = "address">@Model.Address</span>  </h3> 
+        <div class=" text-left" style="overflow:auto; heigth:300px;">
+            <h3>Gests:</h3> 
+            @foreach(var atten in Model.Attendences)
+            {
+                <li> @atten.User.FirstName  @atten.User.LastName </li>
+            }
+        </div>
+        <a href="/Wedding/edit/@Model.WeddingId" class="btn btn-primary btn-lg  text-right"  >Edit Wedding</a> 
+    </div>
+    <!-- <div class="col-md-6" id="map" style="height: 80%;">Google MAP</div> -->
+   <div id="map" style="width:500px;height:380px;">Google Map</div>
+</div>
+
+
+<script src="~/js/viewWedding.js" asp-append-version="true"></script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQkuxGXzO6y7Huu3s6ZFgRvJXsk23-FxI&language=en&region=us&callback=initMap"></script>

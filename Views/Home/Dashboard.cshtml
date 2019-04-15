@@ -1,0 +1,68 @@
+@model DashboardModel
+
+   <div class = "row">
+      <div class = "col-md-2 text-center" ></div>
+      <div class = "col-md-8 align-text-top text-center" ><h1>Welcome to the Weeding Planner!</h1></div>
+      <div class = "col-md-2 align-bottom text-center" ></div>
+   </div>
+   
+   <div class = "row">
+      <div class = "col-md-8 text-center" ></div>
+      <div class = "col-md-2 text-center" > <a href="/logout">Log Out</a> </div>
+      <div class = "col-md-2 align-bottom text-center" ></div>
+   </div>
+   <hr>
+
+   <div class="row"> 
+      <div class="content-right">
+         <h2></h2>
+         <table class="table table-striped table-bordered table-bordered">
+            <tr>
+                  <th>
+                     <p>Weeding</p>
+                  </th>
+                  <th>
+                     <p> Date</p>
+                  </th>
+                  <th>
+                     <p>Guest</p>
+                  </th>
+                  <th>
+                     <p>Action</p>
+                  </th>
+            </tr>
+            @foreach (var wedding in Model.allWedd)
+            {
+               <tr>
+                  <td><a href="ViewWedding/@wedding.WeddingId">  @wedding.WedderOne & @wedding.WedderTwo</a></td>
+                  <td>@wedding.DateofWeeding.ToString("MMMM dd,yyyy")</td>
+                  <td>@wedding.Attendences.Count()</td>
+                  @if( wedding.UserId == Model.Currentuser)
+                  {
+                     <td> <a href="wedding/delete/@wedding.WeddingId">Delete</a> </td>
+                  }
+                  @if((Model.attendWedd.Contains(wedding))&&(wedding.UserId != Model.Currentuser))
+                  {
+                     <td><a href="wedding/unrsvp/@wedding.WeddingId/@Model.Currentuser">Un-RSVP</a> </td>
+                  }
+                  @if((!Model.attendWedd.Contains(wedding))&&(wedding.UserId != Model.Currentuser))
+                  {
+                     <td><a href="wedding/rsvp/@wedding.WeddingId/@Model.Currentuser">RSVP</a> </td>
+                  }
+
+
+               </tr>
+            }
+
+
+         </table>
+      </div>
+   </div>
+   <div class="maincontext">
+      <div class = "row">
+      <div class = "col-md-8 text-center" ></div>
+      <div class = "col-md-2 text-center" > <a href="/NewWedding" class="btn btn-primary btn-lg  text-right"  >New Wedding</a> </div>
+      <div class = "col-md-2 align-bottom text-center" ></div>
+   </div>
+
+   </div>
